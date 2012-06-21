@@ -54,30 +54,6 @@ class Admin::Project < ActiveRecord::Base
     end
   end
   
-  after_save :update_app_saettings
-  
-  def update_app_saettings
-    if name == APP_CONFIG[:site_name] && url == APP_CONFIG[:site_url]
-      update_app_settings
-    end
-    if self.enable_default_users
-      User.unsuspend_default_users
-    else
-      User.suspend_default_users
-    end
-  end
-
-  def update_app_settings
-    new_app_settings = load_all_app_settings
-    new_app_settings[::Rails.env][:site_name] = self.name
-    new_app_settings[::Rails.env][:site_url] = self.url
-    new_app_settings[::Rails.env][:enable_default_users] = self.enable_default_users
-    new_app_settings[::Rails.env][:description] = self.description
-    new_app_settings[::Rails.env][:states_and_provinces] = self.states_and_provinces
-    new_app_settings[::Rails.env][:default_maven_jnlp] = generate_default_maven_jnlp
-    save_app_settings(new_app_settings)
-  end
-
   def generate_default_maven_jnlp
     return nil if !USING_JNLPS || self.maven_jnlp_server.nil?
 
