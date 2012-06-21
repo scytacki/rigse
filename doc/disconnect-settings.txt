@@ -1,0 +1,48 @@
+TASKS
+- create migration to strip no longer used properties from database and replace the accessors in the model with ones that read from the settings, also this should add in some 'active' flag to the project model which is used to to find the active one instead of linking url and name
+-- remove name
+-- remove url
+-- remove enable_default_users
+-- remove states_and_provences
+-- remove maven_jnlp_server_id
+-- remove maven_jnlp_family_id
+-- remove jnlp_version_str
+-- remove snapshot_enabled
+-- add active
+- update the UI to have flag for "active", and remove edit fields for the stuff that is in the settings. 
+- need to look at enable default user setting which should now be only in settings.yml
+so need to make sure that is correctly handled on app startup
+- look for references to the project model for the maven information and see if they can go through the jnlp adapter instead
+- see about optimizing jnlp lookups so string searches don't have to be done on every jnlp request
+
+STILL need to check
+- check if anything is writing into the states_and_provences in the model
+- what to do with the maven_jnlp db stuff:
+   t.integer  "maven_jnlp_server_id"
+    t.integer  "maven_jnlp_family_id"
+    t.string   "jnlp_version_str"
+    t.boolean  "snapshot_enabled"
+-- that is duplicated by the settings: 
+--- default_maven_jnlp
+-- additionally there are settings which list the families and servers, and it is those lists that are imported at some point and then there are references in the project model to the active server, family, and version
+-- the clean thing to do would be to remove the db fields and just use the settings file for this, in which case we might need to optimize some of the lookups 
+- check for references to settings that will be removed:
+-- description
+
+NOT planning to do
+- tests of the settings and project model????
+-- it would be nice to have a test that setups up a portal from scratch with a fixed settings.yml and a clean database and then checks the settings file and checks the portal.
+
+NOTES
+:default_maven_jnlp is accessed by:
+ - project model
+ - setup.rb
+:maven_jnlp_servers is accessed by:
+ - project model
+ - maven_jnlp_server model
+ - setup.rb
+ - jnlp rake task
+:maven_jnlp_families is accessed by:
+ - maven_jnlp_server model
+ - setup.rb
+ - jnlp rake task
