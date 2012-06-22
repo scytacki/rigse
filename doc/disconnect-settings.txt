@@ -1,4 +1,20 @@
 TASKS
+- update the UI to have flag for "active", and remove edit fields for the stuff that is in the settings. 
+- need make sure that enable_default_users is correctly handled on app startup now that it only in settings.yml
+- see about optimizing jnlp lookups so string searches don't have to be done on every jnlp request
+- add some error checking to settings loading similar to the validations in the admin project model:
+-- url checking
+-- states and provinces checking
+- see if there is a way to break the changes into smaller steps that get to the end goal
+- figure out when the snapshot jnlp should be updated
+- make UI for making grades active if there isn't one already (this can be independent of the other stuff)
+- test what happens when setting up a new app, currently it won't have a project created, so we might need to fix something to handle that
+- after merging in updates from Aaron and rails3.0, need to rerun tests and some of the manual checks below
+
+COMPLETED
+- look for references to the project model for the maven information and see if they can go through the jnlp adapter instead
+- check all references to current_project
+- check all references to static Admin::Project to make sure they are still valid
 - create migration to strip no longer used properties from database and replace the accessors in the model with ones that read from the settings, also this should add in some 'active' flag to the project model which is used to to find the active one instead of linking url and name
 -- remove name
 -- remove url
@@ -9,11 +25,6 @@ TASKS
 -- remove jnlp_version_str
 -- remove snapshot_enabled
 -- add active
-- update the UI to have flag for "active", and remove edit fields for the stuff that is in the settings. 
-- need to look at enable default user setting which should now be only in settings.yml
-so need to make sure that is correctly handled on app startup
-- look for references to the project model for the maven information and see if they can go through the jnlp adapter instead
-- see about optimizing jnlp lookups so string searches don't have to be done on every jnlp request
 
 STILL need to check
 - check if anything is writing into the states_and_provences in the model
