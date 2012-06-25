@@ -1,17 +1,24 @@
 TASKS
-- update the UI to have flag for "active", and remove edit fields for the stuff that is in the settings. 
-- need make sure that enable_default_users is correctly handled on app startup now that it only in settings.yml
-- see about optimizing jnlp lookups so string searches don't have to be done on every jnlp request
-- add some error checking to settings loading similar to the validations in the admin project model:
--- url checking
--- states and provinces checking
+- check initial app setup
+- jnlp
+-- what happens if the cache is cleared and then a snapshot jnlp is requested?
+-- 'new' action of admin project needs to be updated
+- url & name
+-- update the UI to have flag for "active"
+-- add url checking when loading settings (this was done by project model validation)
+- other project stuff
+-- review the usage of state_and_provinces to figure out if that can be simplified
+-- need make sure that enable_default_users is correctly handled on app startup now that it only in settings.yml
+-- add states and provinces checking on settings load similar to old validations in project model
+-- make UI for making grades active if there isn't one already (this can be independent of the other stuff)
+
 - see if there is a way to break the changes into smaller steps that get to the end goal
-- figure out when the snapshot jnlp should be updated
-- make UI for making grades active if there isn't one already (this can be independent of the other stuff)
 - test what happens when setting up a new app, currently it won't have a project created, so we might need to fix something to handle that
 - after merging in updates from Aaron and rails3.0, need to rerun tests and some of the manual checks below
 
 COMPLETED
+- do not optimize jnlp lookups because they just make things more complicated
+- leave the current approach to so the snapshot jnlp is updated when ever jnlps are worked with, it will no longer update the snapshot when the default project is updated because that doesn't happen anymore.
 - look for references to the project model for the maven information and see if they can go through the jnlp adapter instead
 - check all references to current_project
 - check all references to static Admin::Project to make sure they are still valid
