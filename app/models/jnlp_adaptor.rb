@@ -31,6 +31,10 @@ class JnlpAdaptor
     [server, family, version]
   end
 
+  def self.jnlp_version
+    @jnlp_version ||= default_jnlp_info[2]
+  end
+
   def self.maven_jnlp_server
       server, family, version = default_jnlp_info
       MavenJnlp::MavenJnlpServer.find_by_name(server[:name])
@@ -48,20 +52,17 @@ class JnlpAdaptor
     # instead of just returning the version string from the settings.yml
     # we need to get the family and depending on the that return the most
     # recent snapshot
-    server, family, version = default_jnlp_info
-    jnlp_family = maven_jnlp_server
-    if version == 'snapshot'
+    if jnlp_version == 'snapshot'
       # return the most recent snapshot_version that is in the database
       # don't do any network look ups here
-      jnlp_family.snapshot_version
+      maven_jnlp_family.snapshot_version
     else
-      version
+      jnlp_version
     end
   end
 
   def self.snapshot_enabled
-    server, family, version = default_jnlp_info
-    version == 'snapshot'
+    jnlp_version == 'snapshot'
   end
 
   def self.update_snapshot_version
