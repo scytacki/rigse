@@ -6,7 +6,6 @@ TASKS
 -- add url checking when loading settings (this was done by project model validation)
 - other project stuff
 -- review the usage of state_and_provinces to figure out if that can be simplified
--- need make sure that enable_default_users is correctly handled on app startup now that it only in settings.yml
 -- add states and provinces checking on settings load similar to old validations in project model
 -- make UI for making grades active if there isn't one already (this can be independent of the other stuff)
 - switch state importing to use :all symbol
@@ -15,6 +14,8 @@ TASKS
 - see if there is a way to break the changes into smaller steps that get to the end goal
 
 COMPLETED
+- remove enable_default_users setting
+- add status info to admin home screen about default users, and rake tasks to enable and disable them
 - update the UI to have flag for "active"
 - 'new' action of admin project needs to be updated
 - after merging in updates from Aaron and rails3.0, need to rerun tests and some of the manual checks below
@@ -50,6 +51,7 @@ STILL need to check
 -- description
 
 NOT planning to do
+- add url checking when loading settings (this was done by project model validation)
 - tests of the settings and project model????
 -- it would be nice to have a test that setups up a portal from scratch with a fixed settings.yml and a clean database and then checks the settings file and checks the portal.
 
