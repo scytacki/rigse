@@ -8,6 +8,12 @@
         %ul.menu_v
           %li
             %b
+            = f.label :active, "Mark this project as active:", :style => "display:inline;"
+            = f.check_box :active
+            %br
+            (The first project marked active will be used for the portal settings.)
+          %li
+            %b
               Enable Student Security Questions:
             = f.check_box :use_student_security_questions
             %br

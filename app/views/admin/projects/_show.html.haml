@@ -12,6 +12,14 @@
           %p
             %ul.menu_v
               %li
+                Project Active:
+                %b
+                  - if admin_project.active
+                    Yes
+                  - else
+                    No
+                (This option determines is this project is used for project settings.)
+              %li
                 Student Security Questions:
                 %b
                   - if admin_project.use_student_security_questions
