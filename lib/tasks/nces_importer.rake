@@ -14,6 +14,11 @@ namespace :portal do
     # 
     desc 'Download NCES CCD data files from NCES website'
     task :download_nces_data do
+      if APP_CONFIG[:states_and_provinces] && APP_CONFIG[:states_and_provinces].empty?
+        puts "Not downloading NCES data because states_and_provinces is an empty array"
+        next
+      end
+
       puts <<-HEREDOC
 
 Download District and School NCES Common Core of Data files from the 
@@ -142,7 +147,6 @@ If APP_CONFIG[:states_and_provinces] is nil then data from all NCES states and p
     desc 'Create districts and schools from NCES records for States listed in settings.yml'
     task :create_districts_and_schools_from_nces_data => :environment do
       states_and_provinces = APP_CONFIG[:states_and_provinces] || StatesAndProvinces::STATES_AND_PROVINCES.keys
-      states_and_provinces = StatesAndProvinces::STATES_AND_PROVINCES.keys if states_and_provinces.is_a?(Array) && states_and_provinces.empty?
       active_school_levels = APP_CONFIG[:active_school_levels] || ["1", "2", "3", "4"]
 
       puts <<-HEREDOC
