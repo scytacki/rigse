@@ -1,16 +1,13 @@
 TASKS
 
-- jnlp
--- what happens if the cache is cleared and then a snapshot jnlp is requested?
-- url & name
--- add url checking when loading settings (this was done by project model validation)
-- other project stuff
--- review the usage of state_and_provinces to figure out if that can be simplified
--- add states and provinces checking on settings load similar to old validations in project model
--- make UI for making grades active if there isn't one already (this can be independent of the other stuff)
+- review the usage of state_and_provinces to figure out if that can be simplified
+- add states and provinces checking on settings load similar to old validations in project model
 - switch state importing to use :all symbol
-- update school selector on teacher page to handle case of no imported states better
+- what happens if the cache is cleared and then a snapshot jnlp is requested?
 
+TODO AFTER initial merge
+- make UI for making grades active if there isn't one already (this can be independent of the other stuff)
+- update school selector on teacher page to handle case of no imported states better
 - see if there is a way to break the changes into smaller steps that get to the end goal
 
 COMPLETED
