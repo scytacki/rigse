@@ -21,8 +21,10 @@ class DisconnectSettings < ActiveRecord::Migration
     # set the first project record to be active
     AdminProject.reset_column_information
     first_project = AdminProject.first 
-    first_project.active = TRUE
-    first_project.save
+    if first_project
+      first_project.active = TRUE
+      first_project.save
+    end
   end
 
   def self.down
