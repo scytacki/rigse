@@ -1,8 +1,7 @@
 TASKS
-- check initial app setup
+
 - jnlp
 -- what happens if the cache is cleared and then a snapshot jnlp is requested?
--- 'new' action of admin project needs to be updated
 - url & name
 -- update the UI to have flag for "active"
 -- add url checking when loading settings (this was done by project model validation)
@@ -13,10 +12,11 @@ TASKS
 -- make UI for making grades active if there isn't one already (this can be independent of the other stuff)
 
 - see if there is a way to break the changes into smaller steps that get to the end goal
-- test what happens when setting up a new app, currently it won't have a project created, so we might need to fix something to handle that
-- after merging in updates from Aaron and rails3.0, need to rerun tests and some of the manual checks below
 
 COMPLETED
+- 'new' action of admin project needs to be updated
+- after merging in updates from Aaron and rails3.0, need to rerun tests and some of the manual checks below
+- check initial app setup
 - do not optimize jnlp lookups because they just make things more complicated
 - leave the current approach to so the snapshot jnlp is updated when ever jnlps are worked with, it will no longer update the snapshot when the default project is updated because that doesn't happen anymore.
 - look for references to the project model for the maven information and see if they can go through the jnlp adapter instead
