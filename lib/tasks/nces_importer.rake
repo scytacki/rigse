@@ -14,7 +14,7 @@ namespace :portal do
     # 
     desc 'Download NCES CCD data files from NCES website'
     task :download_nces_data do
-      if APP_CONFIG[:states_and_provinces] && APP_CONFIG[:states_and_provinces].empty?
+      if Portal::StateOrProvince.configued.empty?
         puts "Not downloading NCES data because states_and_provinces is an empty array"
         next
       end
@@ -102,7 +102,8 @@ If APP_CONFIG[:states_and_provinces] is nil then data from all NCES states and p
 
       HEREDOC
 
-      states_and_provinces = APP_CONFIG[:states_and_provinces]
+      states_and_provinces = Portal::StateOrProvince.configured
+      next if states_and_provinces.empty?
       district_data_fnames = %w{ag061b.dat}
       district_data_fpaths = district_data_fnames.collect { |f| File.join(nces_dir, f) }
       school_data_fnames = %w{Sc061bai.dat Sc061bkn.dat Sc061bow.dat}
@@ -146,7 +147,7 @@ If APP_CONFIG[:states_and_provinces] is nil then data from all NCES states and p
     # 
     desc 'Create districts and schools from NCES records for States listed in settings.yml'
     task :create_districts_and_schools_from_nces_data => :environment do
-      states_and_provinces = APP_CONFIG[:states_and_provinces] || StatesAndProvinces::STATES_AND_PROVINCES.keys
+      states_and_provinces = StateOrProvince.configured
       active_school_levels = APP_CONFIG[:active_school_levels] || ["1", "2", "3", "4"]
 
       puts <<-HEREDOC
@@ -181,7 +182,7 @@ The following codes were calculated from the school's corresponding GSLO and GSH
         count = 0
         school_values = []
         district_values = []
-        state_province_str = "#{state}, #{StatesAndProvinces::STATES_AND_PROVINCES[state]}"
+        state_province_str = "#{state}, #{Portal::StateOrProvince::STATES_AND_PROVINCES[state]}"
         nces_districts = Portal::Nces06District.find(:all, :conditions => { :MSTATE => state }, :select => "id, NAME, LEAID, LZIP, LSTATE")
         if nces_districts.empty?
           puts "\n*** No NCES districts found in state/province: #{state_province_str}"

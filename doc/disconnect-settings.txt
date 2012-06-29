@@ -1,8 +1,5 @@
 TASKS
-
-- review the usage of state_and_provinces to figure out if that can be simplified
-- add states and provinces checking on settings load similar to old validations in project model
-- switch state importing to use :all symbol
+- test from scratch again
 - what happens if the cache is cleared and then a snapshot jnlp is requested?
 
 TODO AFTER initial merge
@@ -11,6 +8,9 @@ TODO AFTER initial merge
 - see if there is a way to break the changes into smaller steps that get to the end goal
 
 COMPLETED
+- refactor states_and_provinces into the StatesAndProvinces module so things don't access the setting directly
+- review the usage of state_and_provinces to figure out if that can be simplified
+- switch state importing to use 'all' symbol
 - remove enable_default_users setting
 - add status info to admin home screen about default users, and rake tasks to enable and disable them
 - update the UI to have flag for "active"
@@ -48,6 +48,7 @@ STILL need to check
 -- description
 
 NOT planning to do
+- add states and provinces checking on settings load similar to old validations in project model
 - add url checking when loading settings (this was done by project model validation)
 - tests of the settings and project model????
 -- it would be nice to have a test that setups up a portal from scratch with a fixed settings.yml and a clean database and then checks the settings file and checks the portal.
