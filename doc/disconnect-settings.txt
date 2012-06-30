@@ -1,13 +1,13 @@
 TASKS
 - test from scratch again
-- what happens if the cache is cleared and then a snapshot jnlp is requested?
 
 TODO AFTER initial merge
 - make UI for making grades active if there isn't one already (this can be independent of the other stuff)
 - update school selector on teacher page to handle case of no imported states better
-- see if there is a way to break the changes into smaller steps that get to the end goal
+- try to break jnlp code. one case that I think breaks it, is if the jnlp object is cached and the set of families are changed there seems to be some weakness there.
 
 COMPLETED
+- tested what happens when jnlp file cache is cleared: the database is still used so everything works as before, what could problematic is if a new snapshot is released and the cache is cleared. But I'm going to punt on this.
 - refactor states_and_provinces into the StatesAndProvinces module so things don't access the setting directly
 - review the usage of state_and_provinces to figure out if that can be simplified
 - switch state importing to use 'all' symbol
