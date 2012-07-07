@@ -93,5 +93,5 @@ module RailsPortal
 
   end
   
-  # ANONYMOUS_USER = User.find_by_login('anonymous')  
+  # ANONYMOUS_USER = User.find_by_login('anonymous')
 end
